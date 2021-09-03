@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Data.Common;
 using System.Data.SqlClient;
-using System.Configuration;
 using Codecool.BookDb.Model;
 
 namespace Codecool.BookDb.Controller
@@ -17,7 +14,7 @@ namespace Codecool.BookDb.Controller
 
         public BookDao()
         {
-            connectionString = ConfigurationManager.AppSettings["connectionString"];
+            connectionString = new BookDbManager().Connect();
         }
 
         public void Add(Book book)

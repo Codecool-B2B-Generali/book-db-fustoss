@@ -1,8 +1,4 @@
 ﻿using System;
-using Codecool.BookDb.Model;
-using Codecool.BookDb.View;
-using Codecool.BookDb.Controller;
-
 
 namespace Codecool.BookDb.View
 {

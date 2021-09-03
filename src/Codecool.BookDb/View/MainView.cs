@@ -1,7 +1,5 @@
 ﻿using System;
 using Codecool.BookDb.Model;
-using Codecool.BookDb.View;
-using Codecool.BookDb.Controller;
 using System.Collections.Generic;
 
 namespace Codecool.BookDb.View
