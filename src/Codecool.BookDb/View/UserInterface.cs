@@ -1,4 +1,8 @@
 ﻿using System;
+using Codecool.BookDb.Model;
+using Codecool.BookDb.View;
+using Codecool.BookDb.Controller;
+
 
 namespace Codecool.BookDb.View
 {
@@ -23,14 +27,31 @@ namespace Codecool.BookDb.View
         {
             // Given string options -> "abcd"
             // keep asking user for input until one of provided chars is provided
-            throw new NotImplementedException();
-        }
+            Console.WriteLine("Enter your option:");
+            String inputString = Console.ReadLine();
+            while (inputString.Length == 0 || !options.Contains(inputString))
+            {
+                Console.WriteLine("Invalid option, please retry:");
+                inputString = Console.ReadLine();
+            }
+            return inputString[0];
+        } 
 
         public string ReadString(string prompt, string defaultValue)
         {
             // Ask user for data. If no data was provided use default value.
             // User must be informed what the default value is.
-            throw new NotImplementedException();
+            Console.WriteLine(prompt);
+            String inputString = Console.ReadLine();
+            if (inputString == string.Empty)
+            {
+                Console.WriteLine($"Default value is: {defaultValue}");
+                return defaultValue;
+            }
+            else
+            {
+                return inputString;
+            }
         }
 
         public DateTime ReadDate(string prompt, DateTime defaultValue)
@@ -38,14 +59,51 @@ namespace Codecool.BookDb.View
             // Ask user for a date. If no data was provided use default value.
             // User must be informed what the default value is.
             // If provided date is in invalid format, ask user again.
-            throw new NotImplementedException();
+            Console.WriteLine(prompt);
+            string inputString = Console.ReadLine();
+            DateTime inputDate;
+            while (!DateTime.TryParseExact(inputString, "yyyy.MM.dd", null, System.Globalization.DateTimeStyles.None, out inputDate))
+            {
+                if (inputString == string.Empty)
+                {
+                    Console.WriteLine($"Default value is: {defaultValue}");
+                    return defaultValue;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid date, please retry");
+                    inputString = Console.ReadLine();
+                }
+            }
+            return inputDate;
         }
-        
+
+        public void ReadAnyKey()
+        {
+            Console.ReadKey();
+        }
+
         public int ReadInt(string prompt, int defaultValue)
         {
             // Ask user for a number. If no data was provided use default value.
             // User must be informed what the default value is.
-            throw new NotImplementedException();
+            Console.WriteLine(prompt);
+            String inputString = Console.ReadLine();
+            int inputInt;
+            while (!int.TryParse(inputString, out inputInt))
+            {
+                if (inputString == string.Empty)
+                {
+                    Console.WriteLine($"Default value is: {defaultValue}");
+                    return defaultValue;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid integer, please retry.");
+                    inputString = Console.ReadLine();
+                }
+            }
+            return inputInt;
         }
     }
 }
