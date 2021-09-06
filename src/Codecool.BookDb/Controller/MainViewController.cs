@@ -26,16 +26,16 @@ namespace Codecool.BookDb.Controller
             char choice;
             do
             {
-                Console.Clear();
+                mainView.ClearScr();
                 choice = mainView.MainMenu();
                 switch (choice)
                 {
                     case 'a':
-                        Console.Clear();
+                        mainView.ClearScr();
                         ProcessAuthors();
                         break;
                     case 'b':
-                        Console.Clear();
+                        mainView.ClearScr();
                         ProcessBooks();
                         break;
                 }
@@ -46,7 +46,7 @@ namespace Codecool.BookDb.Controller
             char choice;
             do
             {
-                Console.Clear(); 
+                mainView.ClearScr();
                 mainView.showSelection("books");
                 choice = mainView.ResourcesMenu();
                 switch (choice)
@@ -109,7 +109,7 @@ namespace Codecool.BookDb.Controller
             char choice;
             do
             {
-                Console.Clear(); 
+                mainView.ClearScr();
                 mainView.showSelection("authors");
                 choice = mainView.ResourcesMenu();
                 switch (choice)

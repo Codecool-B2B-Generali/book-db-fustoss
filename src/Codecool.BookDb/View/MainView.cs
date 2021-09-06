@@ -152,5 +152,10 @@ namespace Codecool.BookDb.View
             else 
                 return false;
         }
+
+        public void ClearScr()
+        {
+            userInterface.ClearScreen();
+        }
     }
 }

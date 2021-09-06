@@ -4,6 +4,11 @@ namespace Codecool.BookDb.View
 {
     public class UserInterface
     {
+        public void ClearScreen()
+        {
+            Console.Clear();
+        }
+
         public void PrintLn(Object obj)
         {
             Console.WriteLine(obj);
