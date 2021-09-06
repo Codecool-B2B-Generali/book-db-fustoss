@@ -23,8 +23,10 @@ namespace Codecool.BookDb.Controller
             {
                 connection.Open();
                 string queryString = $"Insert Into dbo.book (author_id, title) " +
-                    $"Values ('{book.Author.Id}', '{book.Title}');";
+                    $"Values (@authorid, @booktitle);";
                 SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@authorid", book.Author.Id);
+                command.Parameters.AddWithValue("@booktitle", book.Title);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Close();
             }
@@ -67,10 +69,13 @@ namespace Codecool.BookDb.Controller
             {
                 connection.Open();
                 string queryString =
-                    $"Update dbo.book Set author_id ='{book.Author.Id}', " +
-                    $"title='{book.Title}' " +
-                    $"where id = {book.Id};";
+                    $"Update dbo.book Set author_id =@authorid, " +
+                    $"title=@booktitle " +
+                    $"where id = @bookid;";
                 SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@authorid", book.Author.Id);
+                command.Parameters.AddWithValue("@booktitle", book.Title);
+                command.Parameters.AddWithValue("@bookid", book.Id);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Close();
             }

@@ -21,8 +21,11 @@ namespace Codecool.BookDb.Controller
             {
                 connection.Open();
                 string queryString = $"Insert Into dbo.author (first_name, last_name, birth_date) " +
-                    $"Values ('{author.FirstName}', '{author.LastName}', '{author.BirthDate}');";
+                    $"Values (@authorfirstname, @authorlastname, @authorbirthdate);";
                 SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@authorfirstname", author.FirstName);
+                command.Parameters.AddWithValue("@authorlastname", author.LastName);
+                command.Parameters.AddWithValue("@authorbirthdate", author.BirthDate);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Close();
             }
@@ -62,10 +65,14 @@ namespace Codecool.BookDb.Controller
             {
                 connection.Open();
                 string queryString =
-                    $"Update dbo.author Set first_name ='{author.FirstName}', " +
-                    $"last_name='{author.LastName}', " +
-                    $"birth_date='{author.BirthDate}' where id = {author.Id};";
+                    $"Update dbo.author Set first_name = @authorfirstname, " +
+                    $"last_name = @authorlastname, " +
+                    $"birth_date = @authorbirthdate where id = @authorid;";
                 SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@authorfirstname", author.FirstName);
+                command.Parameters.AddWithValue("@authorlastname", author.LastName);
+                command.Parameters.AddWithValue("@authorbirthdate", author.BirthDate);
+                command.Parameters.AddWithValue("@authorid", author.Id);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Close();
             }
