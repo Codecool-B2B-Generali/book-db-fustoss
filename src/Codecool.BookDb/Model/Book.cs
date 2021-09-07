@@ -6,16 +6,13 @@ namespace Codecool.BookDb.Model
         public int Id { get; set; }
         public Author Author { get; set; }
         public string Title { get; set; }
-
         public char Temporary { get; set; }
-        public Book(Author author, string title, char temporary)
+
+        public Book(Author author, string title)
         {
             Author = author;
             Title = title;
-            if (temporary != 'Y')
-            {
-                Id = NextId++;
-            }
+            Id = NextId++;
         }
 
         public override string ToString()

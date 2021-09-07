@@ -53,7 +53,7 @@ namespace Codecool.BookDb.Controller
                         var id = (int)reader["id"];
                         var authorId = (int)reader["author_id"];
                         var book = new Book(Authors.Find(author => author.Id == authorId),
-                                           (string)reader["title"],'N');
+                                           (string)reader["title"]);
                         book.Id = id;
                         Books.Add(book);
                     }
@@ -87,14 +87,15 @@ namespace Codecool.BookDb.Controller
             {
                 connection.Open();
                 string queryString =
-                    $"Delete dbo.book where id = {selectedBook.Id};";
+                    $"Delete dbo.book where id = @selectedbookid;";
                 SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@selectedbookid", selectedBook.Id);
                 try
                 {
                     SqlDataReader reader = command.ExecuteReader();
                     return true;
                 }
-                catch (SqlException e)
+                catch (SqlException)
                 {
                     return false;
                 }

@@ -33,7 +33,7 @@ namespace Codecool.BookDb.View
             string firstName = userInterface.ReadString("Please enter author's first name:", "Unknown");
             string lastName = userInterface.ReadString("Please enter author's last name:", "Unknown");
             DateTime birthDate = userInterface.ReadDate("Please enter author's birth date:", DateTime.Parse("1900.01.01"));
-            return (new Author(firstName, lastName, birthDate,'N'));
+            return (new Author(firstName, lastName, birthDate));
         }
 
         public void showSelection(string selectedItem)
@@ -48,12 +48,10 @@ namespace Codecool.BookDb.View
 
         public Author GetNewAuthorData(Author author)
         {
-            var changedAuthor = new Author(author.FirstName, author.LastName, author.BirthDate, 'Y');
-            changedAuthor.Id = author.Id;
-            changedAuthor.FirstName = userInterface.ReadString("Please enter author's first name, if changed:", author.FirstName);
-            changedAuthor.LastName = userInterface.ReadString("Please enter author's last name if changed:", author.LastName);
-            changedAuthor.BirthDate = userInterface.ReadDate("Please enter author's birth date if changed:", author.BirthDate);
-            return (changedAuthor);
+            author.FirstName = userInterface.ReadString("Please enter author's first name, if changed:", author.FirstName);
+            author.LastName = userInterface.ReadString("Please enter author's last name if changed:", author.LastName);
+            author.BirthDate = userInterface.ReadDate("Please enter author's birth date if changed:", author.BirthDate);
+            return (author);
         }
 
         internal void waitForKey()
@@ -66,16 +64,14 @@ namespace Codecool.BookDb.View
         {
             Author author = SelectAuthor(authors, authors[0]);
             string title = userInterface.ReadString("Please enter new book's title:", "Unknown");
-            return (new Book(author, title,'N'));
+            return (new Book(author, title));
         }
 
         public Book GetNewBookData(Book book, List<Author> authors)
         {
-            var changedBook = new Book(book.Author, book.Title,'Y');
-            changedBook.Author = SelectAuthor(authors, book.Author);
-            changedBook.Title = userInterface.ReadString("Please enter title, if changed:", book.Title);
-            changedBook.Id = book.Id;
-            return (changedBook);
+            book.Author = SelectAuthor(authors, book.Author);
+            book.Title = userInterface.ReadString("Please enter title, if changed:", book.Title);
+            return (book);
         }
 
         public Author SelectAuthor(List<Author> authors, Author defaultAuthor)

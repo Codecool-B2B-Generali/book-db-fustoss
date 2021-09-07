@@ -11,15 +11,12 @@ namespace Codecool.BookDb.Model
         public DateTime BirthDate { get; set; }
         public char Temporary { get; set; }
 
-        public Author(string firstName, string lastName, DateTime birthDate, char temporary)
+        public Author(string firstName, string lastName, DateTime birthDate)
         {
             FirstName = firstName;
             LastName = lastName;
             BirthDate = birthDate;
-            if (temporary != 'Y') 
-            { 
-                Id = NextId++; 
-            }
+            Id = NextId++; 
         }
         
         public override string ToString()

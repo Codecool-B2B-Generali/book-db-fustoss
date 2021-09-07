@@ -51,7 +51,7 @@ namespace Codecool.BookDb.Controller
                     var firstname = (string)reader["first_name"];
                     var lastname = (string)reader["last_name"];
                     var birthdate = (DateTime)reader["birth_date"];
-                    var author = new Author(firstname, lastname, birthdate, 'N');
+                    var author = new Author(firstname, lastname, birthdate);
                     author.Id = id;
                     Authors.Add(author);
                 }
@@ -84,12 +84,13 @@ namespace Codecool.BookDb.Controller
             {
                 connection.Open();
                 string queryString =
-                    $"Delete dbo.author where id = {selectedAuthor.Id};";
+                    $"Delete dbo.author where id = @selecedauthorid;";
                 SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@selecedauthorid", selectedAuthor.Id);
                 try
                 {
                     SqlDataReader reader = command.ExecuteReader();
-                }catch(SqlException e)
+                }catch(SqlException)
                 {
                     return false;
                 }
